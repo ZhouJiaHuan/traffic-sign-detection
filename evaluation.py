@@ -115,36 +115,11 @@ def compute_precision_recall(label_txt, predict_txt, iou1=0.5):
     return pre_rec
 
 
-def plot_pr_curve(label_txt, predict_txt):
-    pre = []
-    rec = []
-    for iou_thresh in range(0,100):
-        iou_thresh /=100.0
-        mean_p = 0
-        mean_r = 0
-        pre_rec = compute_precision_recall(label_txt, predict_txt, iou_thresh)
-        for cls_name, pr in pre_rec.items():
-            mean_p += pre_rec[cls_name][0]
-            mean_r += pre_rec[cls_name][1]
-        mean_p = mean_p/len(pre_rec)
-        mean_r = mean_r/len(pre_rec)
-        pre.append(mean_p)
-        rec.append(mean_r)
-    
-    plt.figure()
-    plt.plot(rec, pre)
-    plt.show()
-
-        
-
-
 if __name__ == "__main__":
-    label_txt = ".\\data\\test_images\\test.txt"
-    predict_txt = ".\\data\\test_result.txt"
+    label_txt = "./data/test_images/test.txt"
+    predict_txt = "./data/test_result.txt"
     pre_rec = compute_precision_recall(label_txt, predict_txt)
     print(pre_rec)
-
-    #plot_pr_curve(label_txt, predict_txt)
      
                         
 
